@@ -1,0 +1,19 @@
+{
+  "name": "medicare-ai-fe06-streaming-chat",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node server.cjs",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "start": "node server.cjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MediCare AI streaming health guidance chat prototype">
+  <title>MediCare AI — Streaming Health Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dist/output.css">
+</head>
+<body class="h-full bg-canvas font-sans text-ink antialiased">
+  <div class="mx-auto flex h-dvh max-w-2xl flex-col sm:h-[calc(100dvh-3rem)] sm:py-6">
+    <div class="flex h-full flex-col overflow-hidden bg-surface sm:rounded-2xl sm:border sm:border-line sm:shadow-sm">
+      <header class="flex items-center justify-between border-b border-line px-4 py-3 sm:px-5">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft font-display text-sm font-semibold text-accent-dark" aria-hidden="true">MA</div>
+          <div>
+            <h1 class="font-display text-[15px] font-semibold leading-tight text-ink">MediCare AI</h1>
+            <p id="statusText" class="flex items-center gap-1.5 text-xs text-ink-muted">
+              <span class="status-dot relative h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+              Ready
+            </p>
+          </div>
+        </div>
+        <button id="clearChatButton" type="button" class="rounded-lg px-2.5 py-1.5 text-xs font-medium text-ink-muted transition hover:bg-canvas hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Clear chat</button>
+      </header>
+
+      <main id="chatBox" class="relative flex-1 space-y-3 overflow-y-auto px-4 py-4 sm:px-5" role="log" aria-label="Conversation" aria-live="off"></main>
+      <button id="jumpButton" type="button" class="absolute bottom-24 left-1/2 hidden -translate-x-1/2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Jump to latest</button>
+      <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+      <div id="errorBox" class="hidden border-t border-red-100 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+        <div class="flex items-start justify-between gap-3">
+          <span id="errorText"></span>
+          <button id="retryButton" type="button" class="shrink-0 font-semibold underline focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500">Retry</button>
+        </div>
+      </div>
+
+      <form id="chatForm" class="border-t border-line px-4 py-3 sm:px-5">
+        <label for="messageInput" class="sr-only">Type your health guidance question</label>
+        <div class="flex items-end gap-2">
+          <div class="min-w-0 flex-1">
+            <textarea id="messageInput" rows="1" maxlength="2000" placeholder="Describe your question or symptoms…" autocomplete="off" class="max-h-32 min-h-10 w-full resize-none rounded-xl border border-line bg-canvas px-4 py-2.5 text-sm text-ink placeholder:text-ink-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"></textarea>
+            <p id="inputHint" class="mt-1 pl-1 text-[11px] text-ink-muted">Enter to send · Shift+Enter for a new line</p>
+          </div>
+          <button id="sendButton" type="submit" aria-label="Send message" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-white transition hover:bg-accent-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40">
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="currentColor" class="h-[18px] w-[18px]"><path d="M3.4 2.5a.75.75 0 0 1 .8-.14l13.5 6a.75.75 0 0 1 0 1.37l-13.5 6a.75.75 0 0 1-1.05-.85L4.8 10 3.15 3.36a.75.75 0 0 1 .25-.86l.0 0Z"/></svg>
+          </button>
+          <button id="stopButton" type="button" aria-label="Stop generating response" class="hidden h-10 shrink-0 rounded-xl border border-line bg-surface px-3 text-xs font-semibold text-ink hover:bg-canvas focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Stop</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
