@@ -107,7 +107,7 @@ async function streamResponse() {
   liveRegion.textContent = "Assistant is thinking.";
 
   try {
-    const isLocalDev = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    const isLocalDev = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "[::1]" || window.location.protocol === "file:";
     const apiEndpoint = isLocalDev && window.location.port !== "3000"
       ? "http://localhost:3000/api/chat"
       : "/api/chat";
@@ -153,7 +153,12 @@ async function streamResponse() {
       liveRegion.textContent = "Generation stopped. The partial response was kept.";
     } else {
       if (!messages[assistantIndex].content) messages.splice(assistantIndex, 1);
-      saveMessages(); render(); showError(error.message);
+      saveMessages(); render();
+      let errMsg = error.message;
+      if (errMsg === "Failed to fetch") {
+        errMsg = "Failed to connect to the backend server. Please make sure the server is running on http://localhost:3000 (run 'npm run dev' or 'node server.cjs') and check your internet connection.";
+      }
+      showError(errMsg);
       liveRegion.textContent = "Assistant request failed.";
     }
   } finally {
