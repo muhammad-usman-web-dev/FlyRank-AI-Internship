@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node server.cjs",
     "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "vercel-build": "npm run build",
     "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "start": "node server.cjs",
     "test": "node --test"
