@@ -1,8 +1,22 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/server"
+      "src": "server.cjs",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "dist/output.css",
+          "js/app.js",
+          "index.html"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.cjs"
     }
   ]
 }

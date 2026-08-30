@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { app } = require('../api/server.cjs');
+const { app } = require('../server.cjs');
 
 async function getJson(url) {
   const response = await fetch(url);

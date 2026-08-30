@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json({ limit: "16kb" }));
-app.use(express.static(path.join(__dirname, "..")));
+app.use(express.static(path.join(__dirname)));
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", service: "MediCare AI streaming chat", aiConfigured: Boolean(process.env.GEMINI_API_KEY) });
@@ -139,7 +139,7 @@ app.post("/api/chat", async (req, res) => {
 
 app.get("*", (req, res) => {
   if (req.path.startsWith("/api/")) return res.status(404).json({ error: "Not found" });
-  res.sendFile(path.join(__dirname, "..", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 if (require.main === module) startServer(PORT);
