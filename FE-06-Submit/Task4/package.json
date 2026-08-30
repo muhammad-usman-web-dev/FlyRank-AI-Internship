@@ -3,11 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server.cjs",
+    "dev": "node api/server.cjs",
     "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
     "vercel-build": "npm run build",
     "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "start": "node server.cjs",
+    "start": "node api/server.cjs",
     "test": "node --test"
   },
   "dependencies": {
